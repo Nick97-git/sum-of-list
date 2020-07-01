@@ -24,7 +24,5 @@ public class Main {
         Future<Integer> future = executorService.submit(callable);
         Integer executorSum = future.get();
         executorService.shutdown();
-
-        System.out.println(forkJoinSum.equals(executorSum));
     }
 }
