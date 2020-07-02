@@ -1,7 +1,6 @@
 import java.util.List;
 import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
-import java.util.stream.LongStream;
 
 public class RecursiveSum extends RecursiveTask<Long> {
     private static final int THRESHOLD = 10000;
@@ -15,9 +14,8 @@ public class RecursiveSum extends RecursiveTask<Long> {
     protected Long compute() {
         int size = nums.size();
         if (size < THRESHOLD) {
-            return LongStream.range(0L, size)
-                    .map(i -> nums.get((int) i))
-                    .sum();
+            return nums.stream()
+                    .reduce(0L, Long::sum);
         }
         int middle = size / 2;
         RecursiveSum firstHalf = new RecursiveSum(nums.subList(0, middle));
